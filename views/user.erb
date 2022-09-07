@@ -1,4 +1,15 @@
 <%=erb :header%>
-<%=@coa_user.name%>
-<a class="btn btn-primary" href="/" role="button">Check Another one!</a>
+<body>
+    <div class="container mt-5">
+        <div class="container card col-md-2 bg-black  mt-5 text-center" style="width:800px">
+            <img class="card-img-top" src="<%=coa_bg(@coa_user.id)%>" alt="Card image">
+            <div class="card-img-overlay mt-5">
+                <h1 class="card-title display-1"><%=@coa_user.name%></h1>
+                <h3 class="card-title">Te da la bienvenida</h3>            
+                <h1 class="card-title display-1"><%=@login.capitalize%></h1>
+                <a class="btn btn-primary mt-3" href="/" role="button">Check Another one!</a>
+            </div>
+        </div>
+    </div>
+</body>
 <%=erb :footer%>

@@ -1,4 +1,6 @@
 <%=erb :header%>
+
+<%# alert %>
 <% if session[:user_not_found] == true%>
     <div class="alert alert-danger fade show" role="alert">
         User not found or coalition not assigned yet, please try again 🥺
@@ -6,9 +8,11 @@
     </div>
     <%session[:user_not_found] = false%>
 <%end%>
+
 <form action="search" method=post>
     <label for="fname">Login:</label>
     <input type="text" id="login" name="login"><br><br>
     <button type="submit" class="btn btn-primary">Reveal Coalition</button>
 </form>
+
 <%=erb :footer%>
