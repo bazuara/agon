@@ -7,7 +7,10 @@ require 'omniauth-marvin'
 
 require_relative 'tools/api42'
 
-cred = Api42.new
+# Static Background URL
+metropolis_background = 'https://cdn.intra.42.fr/coalition/cover/64/Portada_Metropolis_2.jpg'
+atlantis_background = 'https://cdn.intra.42.fr/coalition/cover/65/Portada_Atlantis_2.jpg'
+wakanda_background = 'https://cdn.intra.42.fr/coalition/cover/66/Portada_Wakanda_2_min.jpg'
 
 # enable sessions
 configure do
@@ -15,17 +18,19 @@ configure do
   set :show_exceptions, false
 end
 
-use OmniAuth::Builder do
-  provider :marvin, cred.client_id, cred.client_secret
-end
-
-OmniAuth.config.on_failure = proc do |env|
-  OmniAuth::FailureEndpoint.new(env).redirect_to_failure
-end
-
 get '/' do
-  cred.refresh_token
   erb :landing
+end
+
+post '/search' do
+  @coa_user = Coalition_user.new
+  @coa_user.search(params[:login])
+  if @coa_user.name.nil?
+    session[:user_not_found] = true
+    redirect '/'
+  else
+    erb :user
+  end
 end
 
 get '/*' do
