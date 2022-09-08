@@ -1,18 +1,28 @@
 <%=erb :header%>
-
-<%# alert %>
-<% if session[:user_not_found] == true%>
-    <div class="alert alert-danger fade show" role="alert">
-        User not found or coalition not assigned yet, please try again 🥺
-        </button>
+<body>
+    <div class="container mt-5">
+        <div class="container card col-md-2 bg-black  text-center" style="width:800px">
+        <%# alert %>
+            <% if session[:user_not_found] == true%>
+                <div class="alert alert-danger fade show" role="alert">
+                    User not found or coalition not assigned yet, please try again 🥺
+                    </button>
+                </div>
+                <%session[:user_not_found] = false%>
+            <%end%>
+        <%# logo %>
+            <img src="img/logo_squads.png" class="w-75 mx-auto" alt="coalitions logos">
+            <div class="display-3">The Coalition Revealer</div>
+        <%# form %>
+            <form class="mt-3" action="search" method=post>
+            <div class="mb-3">
+                <input type="text" id="login" name="login" placeholder="Login"></br>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary btn-lg">Reveal Coalition</button>
+            </div>
+            </form>
+        </div>
     </div>
-    <%session[:user_not_found] = false%>
-<%end%>
-
-<form action="search" method=post>
-    <label for="fname">Login:</label>
-    <input type="text" id="login" name="login"><br><br>
-    <button type="submit" class="btn btn-primary">Reveal Coalition</button>
-</form>
-
+</body>
 <%=erb :footer%>
